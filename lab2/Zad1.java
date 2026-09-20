@@ -5,7 +5,6 @@
 // элементов в строке
 package lab2;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class Zad1 {
@@ -38,15 +37,6 @@ public class Zad1 {
         }
     }
 
-    private static void printMatrix(int[][] arr) {
-        for (int[] row : arr) {
-            for (int val : row) {
-                System.out.printf("%5d", val);
-            }
-            System.out.println();
-        }
-    }
-
     private static void bubbleSortRowsByNegativeAndZeroCount(int[][] arr){
         for (int i = 0; i < arr.length - 1; i++) {
             boolean isSwapper = false;
@@ -70,74 +60,21 @@ public class Zad1 {
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = inputMatrixSize(scanner);
+        int n = MatrixUtils.inputMatrixSize(scanner);
         int[][] matrix = new int[n][n];
 
         //Меню
-        fillMatrixMenu(scanner, matrix, n);
+        MatrixUtils.fillMatrixMenu(scanner, matrix);
 
         //Информация о массиве до сортировки
-        printMatrix(matrix);
+        MatrixUtils.printMatrix(matrix);
         printCountOfZeroAndNegative(matrix);
 
         //Сортировка
         bubbleSortRowsByNegativeAndZeroCount(matrix);
         
         //Информация о массиве после сортировки
-        printMatrix(matrix);
+        MatrixUtils.printMatrix(matrix);
         printCountOfZeroAndNegative(matrix);
-    }
-
-    public static int inputMatrixSize(Scanner scanner) {
-        int n;
-
-        do {
-            System.out.print("Пожалуйста, введите размерность массива: ");
-            n = scanner.nextInt();
-        
-            if (n <= 0) {
-                System.out.println("Пожалуста, введите положительное число");
-            }
-        } while(n <= 0); 
-
-        System.out.println("\nСпасибо! Это число подходит");
-
-        return n;
-    }
-
-    public static void fillMatrixMenu(Scanner scanner, int[][] matrix, int n) {
-        int choice;
-        do { 
-            System.out.println("\nМеню");
-            System.out.println("0 - заполнить массив случайными числами");
-            System.out.println("1 - заполнить массив вручную");
-            System.out.print("Ваш выбор: ");
-
-            choice = scanner.nextInt();
-
-            switch (choice) {
-                case 0 -> fillMatrixWithRandom(matrix, n);
-                case 1 -> fillMatrixWithManually(scanner, matrix, n);
-                default -> System.out.println("Нет, либо 1, либо 0. Просто выбери один вариант");
-            }
-        } while (choice != 1 && choice != 0);
-    }
-
-    private static void fillMatrixWithRandom(int[][] matrix, int n){
-        Random random = new Random();
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                  matrix[i][j] = random.nextInt(3) - 1;
-            }
-        }
-    }
-
-    private static void fillMatrixWithManually(Scanner scanner, int[][] matrix, int n){
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print("matrix[" + i + "][" + j + "] = ");
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
     }
 }

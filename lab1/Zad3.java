@@ -1,9 +1,9 @@
 // Для каждого числа из заданной последовательности натуральных чисел
 // определить, верно ли, что куб суммы его цифр равен квадрату числа.
 
-package lab_1;
+package lab1;
 
-public class zad_3 {
+public class Zad3 {
     public static void main(String[] args) {
         int numbers[] = {1, 27, 100, 12345, 0, 45915};
         for(int num : numbers) {

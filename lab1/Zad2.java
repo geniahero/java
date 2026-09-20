@@ -1,11 +1,11 @@
 // Найти и вывести все пятизначные числа из заданной последовательности чисел,
 // средняя цифра которых равна сумме крайних цифр. Подсчитать их количество.
-package lab_1;
+package lab1;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class zad_2 {
+public class Zad2 {
     public static void main(String[] args) {
         List<Integer> necessaryNumbers = new ArrayList<>();
         int numbers[] = {12345, 10201, 45915, 30000, 95900, 71234};

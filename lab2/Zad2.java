@@ -16,18 +16,14 @@ public class Zad2 {
             // Перебираем столбцы соседей от j-1 до j+1
             for (int q = j - 1; q <= j + 1; q++) {
             
-            // 1. Проверяем выход за границы матрицы (подходит для прямоугольных матриц!)
                 if (p < 0 || p >= arr.length || q < 0 || q >= arr[p].length) {
                     continue;
                 }
             
-            // 2. Пропускаем сам центральный элемент, его с самим собой сравнивать не надо
                 if (p == i && q == j) {
                     continue;
                 }
             
-            // 3. Главное условие: если сосед больше или равен нашему элементу,
-            // то наш элемент уже НЕ является СТРОГИМ локальным максимумом.
                 if (arr[p][q] >= element) {
                     return false;
                 }
@@ -45,6 +41,33 @@ public class Zad2 {
         }
         return min;
     }
+
+    public static void searchMaxLocalMaximum(int[][] arr) {
+        int minElement = minElementMatrix(arr);
+        int localMax = minElement;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if(isLocalMaximum(arr, i, j)){
+                    if(localMax < arr[i][j]){
+                        localMax = arr[i][j];
+                    }
+                }
+            }
+        }
+
+
+        if(localMax != minElement) {
+            for (int i = 0; i < arr.length; i++) {
+                for (int j = 0; j < arr.length; j++) {
+                    if(localMax == arr[i][j]){
+                        if(isLocalMaximum(arr, i, j)){
+                            System.out.println("Число matrix[" + i + "][" + j + "] = " + arr[i][j] + " является наибольшим среди локальных максимумов");
+                        }
+                    }
+                }
+            }
+        } else System.out.println("Не хочу тебя расстраивать, но в массиве нет локальных максимумов");
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = MatrixUtils.inputMatrixSize(scanner);
@@ -56,29 +79,7 @@ public class Zad2 {
         //Информация о массиве до сортировки
         MatrixUtils.printMatrix(matrix);
 
-        int minElement = minElementMatrix(matrix);
-        int localMax = minElement;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if(isLocalMaximum(matrix, i, j)){
-                    if(localMax < matrix[i][j]){
-                        localMax = matrix[i][j];
-                    }
-                }
-            }
-        }
-
-
-        if(localMax != minElement) {
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    if(localMax == matrix[i][j]){
-                        if(isLocalMaximum(matrix, i, j)){
-                            System.out.println("Число matrix[" + i + "][" + j + "] = " + matrix[i][j] + " является наибольшим среди локальных максимумов");
-                        }
-                    }
-                }
-            }
-        } else System.out.println("Не хочу тебя расстраивать, но в массиве нет локальных максимумов");
+        //поиск всех наибольших среди локальных максимумов
+        searchMaxLocalMaximum(matrix);
     }   
 }

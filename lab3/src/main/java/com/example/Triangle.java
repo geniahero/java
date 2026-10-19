@@ -9,7 +9,7 @@ public class Triangle {
     private double sizeBC;
     private double sizeAC;
 
-    private double epsilon = 0.0001;
+    private double epsilon = 0.001;
 
     public Triangle(Point a, Point b, Point c) {
         this.a = a;
@@ -23,6 +23,10 @@ public class Triangle {
 
     private boolean isEqual(double a, double b) {
         return Math.abs(a - b) < epsilon;
+    }
+
+    public boolean isValid() {
+    return getArea() > epsilon;
     }
 
     public double getPerimeter(){
